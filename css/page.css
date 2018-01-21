@@ -1,7 +1,12 @@
 html {
+	color: hsl(0, 0%, 20%);
+	font-family: 'Bowlby One SC', cursive;
 	background-image: url("img/gray-seamless-canvas-texture.jpg")
 }
 
+.title {
+	font-size: 20px;
+}
 .overlay {
 	position: absolute;
 	width: 100%;

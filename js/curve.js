@@ -132,7 +132,7 @@ CurveEdge.prototype.draw = function(g) {
 //======================================================
 // Curve
 //======================================================
-let curveCount = 0;
+let curveCount = Math.floor((Math.random()*10000));
 
 function Curve() {
 

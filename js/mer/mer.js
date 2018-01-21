@@ -1,4 +1,4 @@
-let merCount = 0
+let merCount = Math.floor((Math.random()*10000))
 
 function Mer() {
 	this.id = merCount++;
@@ -19,14 +19,16 @@ function Mer() {
 
 
 Mer.prototype.draw = function(g) {
-	if (this.color)
+	g.noStroke();
+	g.noFill()
+	if (this.id % 12 % 4 > 2)
 		this.color.fill(g, .4, .4);
-	if (this.color)
+	if (this.id % 10 % 3 === 1)
 		this.color.stroke(g, -.5, 1);
 
 
-
-	this.curve.draw(g);
+	
+		this.curve.draw(g);
 
 
 
@@ -50,14 +52,14 @@ Mer.prototype.draw = function(g) {
 
 			linesBetween(g, this.color, last, c)
 		}
-		if (c.id % 7 === 3)
+		if (c.id % 9 === 3)
 			dots(g, this.color, last)
 
 		last = c;
 
 	}
 
-	if (this.curve.id % 6 % 2 == 1) {
+	if (this.curve.id % 11 % 3 == 1) {
 		g.noStroke();
 		this.color.fill(g)
 		this.curve.drawPoints(g);
