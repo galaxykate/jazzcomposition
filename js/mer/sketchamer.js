@@ -10,6 +10,11 @@ $(document).keyup((ev) => {
 $(document).ready(() => {
 	console.log("start sketchin' mers")
 
+	$("#clear").click(() => {
+		console.log("click")
+		mers = []
+	})
+
 	let svgHolder = $("#view-svg");
 	let w = svgHolder.width();
 	let h = svgHolder.height();
@@ -35,9 +40,9 @@ $(document).ready(() => {
 		g.background(1, 1, 1, 0)
 		//mers.forEach(mer => mer.draw(g))
 		mers.forEach(mer => {
-			
-			mer.draw(g)}
-			)
+
+			mer.draw(g)
+		})
 		//mers.forEach(mer => mer.drawHandles(g))
 
 
@@ -133,7 +138,7 @@ $(document).ready(() => {
 			} else {
 				if (mouse.drawingCurve) {
 					let d = mouse.drawingCurve.getDistanceToLast(mouse.p);
-				
+
 					if (d > 100) {
 						mouse.drawingCurve.addPoint(mouse.p)
 					}

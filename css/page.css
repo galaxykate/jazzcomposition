@@ -20,3 +20,9 @@ html {
 	width: 400px;
 	height: 300px;
 }
+
+
+#label {
+	position: absolute;
+	z-index: 100;
+}
