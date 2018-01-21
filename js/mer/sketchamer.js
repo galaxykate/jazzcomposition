@@ -1,4 +1,5 @@
 let smoothCount = 2;
+let paused = false;
 $(document).keyup((ev) => {
 	console.log(ev.which)
 	if (ev.which === 49)
@@ -6,6 +7,9 @@ $(document).keyup((ev) => {
 	if (ev.which === 50)
 		smoothCount++;
 	console.log(smoothCount);
+	if (ev.which === 32)
+		paused = !paused;
+
 })
 $(document).ready(() => {
 	console.log("start sketchin' mers")
@@ -31,18 +35,20 @@ $(document).ready(() => {
 
 	utilities.createProcessing($("#view-p5"), (t) => {
 		//	t.update();
-		if (t.frames < 100000) {
+		if (!paused)
 			mers.forEach(mer => mer.update(t))
-			//mers.forEach(mer => mer.redrawSVG())
-		}
+		//mers.forEach(mer => mer.redrawSVG())
+
 		mers.forEach(mer => mer.update(t))
 	}, (g) => {
-		g.background(1, 1, 1, 0)
-		//mers.forEach(mer => mer.draw(g))
-		mers.forEach(mer => {
+		if (!paused) {
 
-			mer.draw(g)
-		})
+			g.background(1, 1, 1, 0)
+			//mers.forEach(mer => mer.draw(g))
+			mers.forEach(mer => {
+				mer.draw(g)
+			})
+		}
 		//mers.forEach(mer => mer.drawHandles(g))
 
 
