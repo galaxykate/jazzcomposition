@@ -1,4 +1,4 @@
-let merCount = Math.floor((Math.random()*10000))
+let merCount = Math.floor((Math.random() * 10000))
 
 function Mer() {
 	this.id = merCount++;
@@ -27,8 +27,8 @@ Mer.prototype.draw = function(g) {
 		this.color.stroke(g, -.5, 1);
 
 
-	
-		this.curve.draw(g);
+
+	this.curve.draw(g);
 
 
 
@@ -46,8 +46,10 @@ Mer.prototype.draw = function(g) {
 		}
 		this.twins[i].draw(g)
 
-		if (c.id % 2 === 0)
+		if (c.id % 14 % 4 === 0)
 			fillBetween(g, this.color, last, c)
+
+
 		if (c.id % 4 === 0) {
 
 			linesBetween(g, this.color, last, c)
@@ -68,6 +70,8 @@ Mer.prototype.draw = function(g) {
 }
 
 function fillBetween(g, color, c0, c1) {
+	color.fill(g, Math.sin(c0.id), .3 + .3 * utilities.noise(c0.id))
+
 	g.beginShape();
 	c0.drawVerts(g)
 	c1.drawVertsReverse(g)

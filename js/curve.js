@@ -132,7 +132,7 @@ CurveEdge.prototype.draw = function(g) {
 //======================================================
 // Curve
 //======================================================
-let curveCount = Math.floor((Math.random()*10000));
+let curveCount = Math.floor((Math.random() * 10000));
 
 function Curve() {
 
@@ -167,16 +167,25 @@ Curve.prototype.getPoint = function(segment, t) {
 }
 
 Curve.prototype.update = function(t) {
+	let solo = utilities.noise(t.current * .2, 20 + this.id)
+
 	for (var i = 0; i < this.points.length; i++) {
 		let r = .5 + .5 * utilities.noise(.1 * t.current + .2 * i + this.id)
 		let theta = 30 * utilities.noise(.04 * t.current + .2 * i + this.id)
 		this.points[i].p.addPolar(r, theta);
 		this.points[i].p.mult(.9998)
 
+		this.points[i].p.radius = 10 + 8 * utilities.noise(t.current * .02, i * .2 + this.id)
+		let bump = solo * (Math.sin(t.current * 4) + 1)
+		bump *= Math.pow(utilities.noise(t.current*1 + i * .2 + 20 * this.id), 3)
+		this.points[i].p.radius *= 1 + 1 * bump;
+
 		if (i > 0)
 			this.points[i].p.lerp(this.points[i - 1].p, .0009)
 		if (i < this.points.length - 1)
 			this.points[i].p.lerp(this.points[i + 1].p, .0009)
+
+
 	}
 	this.smooth();
 
